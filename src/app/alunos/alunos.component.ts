@@ -48,8 +48,8 @@ export class AlunosComponent implements OnInit {
     this.alunoForm = this.fb.group({
       id:[''],
       nome: ['', Validators.required],
-      sobrenome: [''],
-      telefone: ['']
+      sobrenome: ['', Validators.required],
+      telefone: ['', Validators.required]
    } );
   }
 
@@ -63,7 +63,7 @@ export class AlunosComponent implements OnInit {
         console.log(retorno);
         this.carregarAlunos();
       },
-      (errp: any) => {
+      (erro: any) => {
         console.log(erro);
       }
     );
