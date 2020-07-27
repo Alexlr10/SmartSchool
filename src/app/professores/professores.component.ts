@@ -34,7 +34,7 @@ export class ProfessoresComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.carregarProfessor();
+    this.carregarProfessores();
   }
 
   criarForm() {
@@ -44,6 +44,7 @@ export class ProfessoresComponent implements OnInit {
     });
   }
 
+ 
   professorSubmit() {
     this.salvarProfessor(this.professorForm.value);
   }
@@ -54,10 +55,10 @@ export class ProfessoresComponent implements OnInit {
   }
 
   salvarProfessor(professor: Professor) {
-    this.alunoService.put(professor.id, professor).subscribe(
+    this.professorService.put(professor.id, professor).subscribe(
       (retorno: Professor) => {
         console.log(retorno);
-        this.carregarProfessor();
+        this.carregarProfessores();
       },
       (erro: any) => {
         console.log(erro);
@@ -65,7 +66,8 @@ export class ProfessoresComponent implements OnInit {
     );
   }
 
-  carregarProfessor() {
+
+  carregarProfessores() {
     this.professorService.getAll().subscribe(
       (professores: Professor[]) => {
         this.professores = professores;

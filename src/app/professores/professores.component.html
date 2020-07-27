@@ -1,32 +1,29 @@
 
-<div *ngIf="professorSelecionado">
+  <div *ngIf="professorSelecionado">
 
-  <div class="row">
-    <div class="mr-auto">
-      <app-titulo [titulo]="'Professor: '+ professorSelecionado.id"> </app-titulo>
+    <div class="row">
+      <div class="mr-auto">
+        <app-titulo [titulo]="'Professor: '+ professorSelecionado.id"> </app-titulo>
+      </div>
+      <div class="mt-1">
+        <button class="bt btn-warning" (click)="voltar()">Lista de Professores</button>
+      </div>
     </div>
-    <div class="mt-1">
-      <button class="bt btn-warning" (click)="voltar()">Lista de Professores</button>
-    </div>
+
+
+
+    <form [formGroup]="professorForm" (submit)="professorSubmit()">
+      <div class="form-group">
+        <label for="formGroupExampleInput">Nome: </label>
+        <input type="text" formControlName="nome" class="form-control">
+      </div>
+    
+      <div class="form-group">
+        <button class="btn btn-success" [disabled]="!professorForm.valid">Enviar</button>
+      </div>
+    </form>
+
   </div>
-
-
-
-  <form>
-    <div class="form-group" [formGroup]="professorForm" (submit)="professorSubmit()">
-      <label for="formGroupExampleInput">Nome: </label>
-      <input type="text" formControlName="nome" class="form-control">
-    </div>
-    <!--<div class="form-group">
-    <label for="formGroupExampleInput2">Disciplina: </label>
-    <input type="text" value="{{professorSelecionado.disciplina}}" class="form-control">
-  </div>-->
-    <div class="form-group">
-      <button class="btn btn-success" [disabled]="!professorForm.valid">Enviar</button>
-    </div>
-  </form>
-
-</div>
 
 <div *ngIf="!professorSelecionado">
   <app-titulo [titulo]="titulo"> </app-titulo>
