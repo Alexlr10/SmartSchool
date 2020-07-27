@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Professor } from '../models/Professor';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ProfessorService } from './professor.service';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-professores',
@@ -11,22 +13,11 @@ export class ProfessoresComponent implements OnInit {
     [x: string]: any;
 
   public modalRef: BsModalRef;
+  public professorForm: FormGroup;
   titulo = 'Professores';
   public professorSelecionado: Professor;
-  public professores = [
+  public professores: Professor[];
 
-    { id: 1, nome: 'Jose', disciplina: 'Matematica'},
-    { id: 2, nome: 'Mateus', disciplina: 'Portugues' },
-    { id: 3, nome: 'Vivas', disciplina: 'Fisica' },
-    { id: 4, nome: 'Cinthya', disciplina: 'Ingles' },
-    { id: 5, nome: 'Santim', disciplina: 'Geografia' },
-    { id: 6, nome: 'Lana', disciplina: 'Quimica' },
-    { id: 7, nome: 'Pelli', disciplina: 'Historia' },
-  ];
-
-  professorSelect(professor: Professor) {
-    this.professorSelecionado = professor;
-  }
 
   voltar() {
     this.professorSelecionado = null;
@@ -36,9 +27,55 @@ export class ProfessoresComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private fb: FormBuilder,
+    private modalService: BsModalService,
+    private professorService: ProfessorService) {
+    this.criarForm();
+  }
 
   ngOnInit(): void {
+    this.carregarProfessor();
   }
+
+  criarForm() {
+    this.professorForm = this.fb.group({
+      id: [''],
+      nome: ['', Validators.required],
+    });
+  }
+
+  professorSubmit() {
+    this.salvarProfessor(this.professorForm.value);
+  }
+
+  professorSelect(professor: Professor) {
+    this.professorSelecionado = professor;
+    this.professorForm.patchValue(professor);
+  }
+
+  salvarProfessor(professor: Professor) {
+    this.alunoService.put(professor.id, professor).subscribe(
+      (retorno: Professor) => {
+        console.log(retorno);
+        this.carregarProfessor();
+      },
+      (erro: any) => {
+        console.log(erro);
+      }
+    );
+  }
+
+  carregarProfessor() {
+    this.professorService.getAll().subscribe(
+      (professores: Professor[]) => {
+        this.professores = professores;
+      },
+      (erro: any) => {
+        console.error(erro);
+      }
+    )
+  }
+
+
 
 }
