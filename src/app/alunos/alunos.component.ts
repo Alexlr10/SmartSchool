@@ -71,6 +71,18 @@ export class AlunosComponent implements OnInit {
     );
   }
 
+  deletarAluno(id: number) {
+    this.alunoService.delete(id).subscribe(
+      (retorno : any) => {
+        console.log(retorno);
+        this.carregarAlunos();
+      },
+      (erro: any) => {
+        console.error(erro);
+      }
+    );
+  }
+
 alunoSelect(aluno: Aluno) {
   this.alunoSelecionado = aluno;
   this.alunoForm.patchValue(aluno);
