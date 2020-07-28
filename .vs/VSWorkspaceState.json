@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\alunos",
+    "\\src\\app\\models",
+    "\\src\\app\\professores"
   ],
+  "SelectedNode": "\\src\\app\\models\\Professor.ts",
   "PreviewInSolutionExplorer": false
 }

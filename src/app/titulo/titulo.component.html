@@ -1,3 +1,12 @@
-<h1>
-  {{ titulo }}
-</h1>
+<div class="container">
+  <div class="row">
+    <div class="mr-auto">
+      <h1>
+        {{ titulo }}
+      </h1>
+    </div>
+    <div class="mt-1">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

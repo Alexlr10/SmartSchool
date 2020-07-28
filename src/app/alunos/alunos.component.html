@@ -5,14 +5,13 @@
 
   <div class="col-sm-6" *ngIf="alunoSelecionado">
 
-    <div class="row">
-      <div class="mr-auto">
-        <app-titulo [titulo]="'Cod Aluno: '+ alunoSelecionado.id"> </app-titulo>
-      </div>
-      <div class="mt-1">
-        <button class="btn btn-sm btn-outline-danger" (click)="voltar()">Fechar</button>
-      </div>
-    </div>
+
+    <app-titulo [titulo]="(alunoSelecionado.id === 0 ? 'Novo Aluno' : 'Cod Aluno: '+  alunoSelecionado.id)">
+      <button class="btn btn-sm btn-outline-danger" (click)="voltar()">Fechar</button>
+    </app-titulo>
+
+
+
 
 
 
@@ -36,7 +35,11 @@
 
   </div>
   <div [ngClass]="{'col-sm-6' : alunoSelecionado, 'col-sm-12' : !alunoSelecionado }">
-    <app-titulo [titulo]="titulo"> </app-titulo>
+    <app-titulo [titulo]="titulo">
+      <div class="mt-1">
+        <button class="bt btn-success" (click)="alunoNovo()">Cadastrar Aluno</button>
+      </div>
+    </app-titulo>
     Nenhum selecionado
 
     <table class="table table-hover">
@@ -78,7 +81,7 @@
 <!--<button type="button" class="btn btn-primary" >Create template modal</button>-->
 
 <ng-template #template>
- 
+
   <div class="modal-body">
     <app-professores></app-professores>
   </div>

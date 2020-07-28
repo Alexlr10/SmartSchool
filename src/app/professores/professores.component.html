@@ -1,15 +1,12 @@
 
   <div *ngIf="professorSelecionado">
 
-    <div class="row">
-      <div class="mr-auto">
-        <app-titulo [titulo]="'Professor: '+ professorSelecionado.id"> </app-titulo>
-      </div>
+    <app-titulo [titulo]="'Professor: '+ professorSelecionado.id">
       <div class="mt-1">
         <button class="bt btn-warning" (click)="voltar()">Lista de Professores</button>
       </div>
-    </div>
-
+    </app-titulo>
+ 
 
 
     <form [formGroup]="professorForm" (submit)="professorSubmit()">
@@ -26,7 +23,11 @@
   </div>
 
 <div *ngIf="!professorSelecionado">
-  <app-titulo [titulo]="titulo"> </app-titulo>
+  <app-titulo [titulo]="titulo">
+    <div class="mt-1">
+      <button class="bt btn-success" (click)="voltar()">Cadastrar Professor</button>
+    </div>
+  </app-titulo>
   Nenhum selecionado
 
   <table class="table table-hover">
