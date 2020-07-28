@@ -1,7 +1,7 @@
 
   <div *ngIf="professorSelecionado">
 
-    <app-titulo [titulo]="'Professor: '+ professorSelecionado.id">
+    <app-titulo [titulo]="(professorSelecionado.id === 0 ? 'Novo Professor' : 'Cod Professor: '+  professorSelecionado.id)">
       <div class="mt-1">
         <button class="bt btn-warning" (click)="voltar()">Lista de Professores</button>
       </div>
@@ -16,7 +16,7 @@
       </div>
     
       <div class="form-group">
-        <button class="btn btn-success" [disabled]="!professorForm.valid">Enviar</button>
+        <button class="btn btn-success" [disabled]="!professorForm.valid">Salvar</button>
       </div>
     </form>
 
@@ -25,7 +25,7 @@
 <div *ngIf="!professorSelecionado">
   <app-titulo [titulo]="titulo">
     <div class="mt-1">
-      <button class="bt btn-success" (click)="voltar()">Cadastrar Professor</button>
+      <button class="bt btn-success" (click)="professorNovo()">Cadastrar Professor</button>
     </div>
   </app-titulo>
   Nenhum selecionado

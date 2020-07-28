@@ -17,6 +17,7 @@ export class ProfessoresComponent implements OnInit {
   titulo = 'Professores';
   public professorSelecionado: Professor;
   public professores: Professor[];
+  public modo: string;
 
 
   voltar() {
@@ -54,8 +55,14 @@ export class ProfessoresComponent implements OnInit {
     this.professorForm.patchValue(professor);
   }
 
+  professorNovo() {
+    this.professorSelecionado = new Professor();
+    this.professorForm.patchValue(this.professorSelecionado);
+  }
+
   salvarProfessor(professor: Professor) {
-    this.professorService.put(professor.id, professor).subscribe(
+    (professor.id === 0) ? this.modo = 'post' : this.modo = 'put';
+    this.professorService[this.modo](professor).subscribe(
       (retorno: Professor) => {
         console.log(retorno);
         this.carregarProfessores();
